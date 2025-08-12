@@ -1,19 +1,26 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useState } from 'react';
 import { LayoutChangeEvent, StyleSheet } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useUI } from '../providers/UIProvider';
 import TabBarbutton from './TabBarbutton';
 
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const { tabBarHidden } = useUI();
+  const { tabBarHidden, sheetProgress } = useUI();
 
   const [dimensions, setDimensions] = useState({ height: 20, width: 100 });
   const buttonWidth = dimensions.width / state.routes.length;
   const onTabBarLayout = (e: LayoutChangeEvent) => {
     setDimensions({
       height: e.nativeEvent.layout.height,
-      width: e.nativeEvent.layout.width
+      width: e.nativeEvent.layout.width,
     });
   };
 
@@ -22,31 +29,48 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
     transform: [{ translateX: tabPositionsX.value }],
   }));
 
-  const hideY = useSharedValue(0);
+  // === progress dari context → shared value biar anim halus saat drag
+  const p = useSharedValue(0); // 0=show, 1=hide
   useEffect(() => {
-    hideY.value = tabBarHidden ? withTiming(140, { duration: 220 }) : withTiming(0, { duration: 220 });
-  }, [tabBarHidden, hideY]); // <- tambah dep supaya tidak warning
+    // respon cepat saat jari bergerak (durasi kecil)
+    p.value = withTiming(sheetProgress, { duration: 50 });
+  }, [sheetProgress, p]);
 
-  const hideStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: hideY.value }],
-    opacity: tabBarHidden ? 0 : 1,
-  }));
+  // style hide berdasarkan progress
+  const hideStyle = useAnimatedStyle(() => {
+    const translateY = interpolate(p.value, [0, 1], [0, 160], Extrapolation.CLAMP);
+    const scale = interpolate(p.value, [0, 1], [1, 0.96], Extrapolation.CLAMP);
+    const opacity = interpolate(p.value, [0, 1], [1, 0], Extrapolation.CLAMP);
+    return { transform: [{ translateY }, { scale }], opacity };
+  });
 
   return (
-    <Animated.View onLayout={onTabBarLayout} style={[styles.tabBar, hideStyle]} pointerEvents={tabBarHidden ? 'none' : 'auto'}>
-      <Animated.View style={[indicatorStyle, {
-        position: 'absolute',
-        backgroundColor: '#723FEB',
-        borderRadius: 100,
-        marginHorizontal: 12,
-        height: dimensions.height - 15,
-        width: buttonWidth - 25,
-      }]} />
+    <Animated.View
+      onLayout={onTabBarLayout}
+      style={[styles.tabBar, hideStyle]}
+      pointerEvents={tabBarHidden ? 'none' : 'auto'} // tetap non-interaktif saat sheet terbuka penuh
+    >
+      <Animated.View
+        style={[
+          indicatorStyle,
+          {
+            position: 'absolute',
+            backgroundColor: '#98CD00',
+            borderRadius: 100,
+            marginHorizontal: 12,
+            height: dimensions.height - 15,
+            width: buttonWidth - 25,
+          },
+        ]}
+      />
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
-          typeof options.tabBarLabel === 'string' ? options.tabBarLabel :
-          typeof options.title === 'string' ? options.title : route.name;
+          typeof options.tabBarLabel === 'string'
+            ? options.tabBarLabel
+            : typeof options.title === 'string'
+            ? options.title
+            : route.name;
 
         const isFocused = state.index === index;
 
@@ -73,7 +97,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 }
 
 const styles = StyleSheet.create({
-  // persis dari kode awalmu
+  // desain asli kamu—tanpa perubahan
   tabBar: {
     position: 'absolute',
     bottom: 50,

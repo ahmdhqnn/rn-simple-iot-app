@@ -1,6 +1,5 @@
-import { Feather } from "@expo/vector-icons";
 import React from "react";
-import { Dimensions, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import Animated, { Extrapolation, interpolate, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import BottomSheet from "../../components/BottomSheet";
 import { useUI } from "../../providers/UIProvider";
@@ -16,7 +15,7 @@ const TOP_INSET = 80;                 // jarak sheet dari atas saat expanded
 const riceImg = require("../../assets/images/examplepadi.png");
 
 export default function Index() {
-  const { setTabBarHidden } = useUI();
+  const { setTabBarHidden, setSheetProgress } = useUI();
   const sheetY = useSharedValue(H);
 
   // Padi membesar & naik, lalu "duduk" di bibir card saat panel terbuka
@@ -33,13 +32,7 @@ export default function Index() {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.safe}>
         {/* Top bar */}
-        <View style={styles.topBar}>
-          <Text style={styles.title}>Padi Monitor</Text>
-          <TouchableOpacity>
-            <Feather name="bell" size={24} color="#333" />
-          </TouchableOpacity>
-        </View>
-
+        
         {/* Gambar padi */}
         <View style={styles.hero}>
           <Animated.Image source={riceImg} resizeMode="contain" style={[styles.rice, riceAnim]} />
@@ -48,10 +41,15 @@ export default function Index() {
 
       {/* Panel detail (card setengah layar) */}
       <BottomSheet
-        topInset={TOP_INSET}
-        onExpandedChange={(v) => setTabBarHidden(v)}      // sembunyikan tab bar saat swipe up
-        onPositionChange={(y) => { sheetY.value = y; }}   // sinkron animasi padi
-      >
+    topInset={TOP_INSET}
+    onExpandedChange={(v) => setTabBarHidden(v)}
+    onPositionChange={(y) => {
+      sheetY.value = y;
+      // kirim progress 0..1 untuk TabBar (0=tertutup,1=terbuka)
+      const p = Math.min(1, Math.max(0, (H - y) / (H - TOP_INSET)));
+      setSheetProgress(p);
+    }}
+  >
         <View style={[styles.cardWrap, { height: CARD_H, marginBottom: 16 }]}>
           <View style={styles.card}>
             {/* Header dots + label */}
