@@ -69,8 +69,8 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
           typeof options.tabBarLabel === 'string'
             ? options.tabBarLabel
             : typeof options.title === 'string'
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -86,7 +86,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             onPress={onPress}
             onLongPress={() => navigation.emit({ type: 'tabLongPress', target: route.key })}
             isFocused={isFocused}
-            routeName={route.name as 'index' | 'chart' | 'setting'}
+            routeName={route.name as 'index' | 'plant' | 'device'}
             color={isFocused ? '#FFF' : '#222'}
             label={label}
           />

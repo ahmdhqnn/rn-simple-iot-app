@@ -1,14 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const chart = () => {
+const plant = () => {
     return (
         <View>
-            <Text>chart</Text>
+            <Text>plant</Text>
         </View>
     )
 }
 
-export default chart
+export default plant
 
 const styles = StyleSheet.create({})

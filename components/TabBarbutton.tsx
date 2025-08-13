@@ -2,10 +2,10 @@ import { icon } from "@/constants/icon";
 import React, { useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import Animated, {
-    interpolate,
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
 } from "react-native-reanimated";
 
 import type { GestureResponderEvent } from "react-native";
@@ -68,7 +68,7 @@ const TabBarbutton = ({
       {/* Animated text for the label */}
       <Animated.Text
         style={[
-          { color: isFocused ? "#673ab7" : "#222", fontSize: 12 },
+          { color: isFocused ? "" : "#222", fontSize: 12 },
           animatedTextStyle,
         ]}
       >
