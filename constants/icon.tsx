@@ -13,6 +13,17 @@ const GLYPH: Record<string, string> = {
   // ===== Setting =====
   "bx-server": "ebfd",
   "bxs-server": "ee9e",
+
+  // ===== Location =====
+  "bxs-map": "ee19",
+
+  // ===== Other icons =====
+  "bxs-stopwatch": "eebb",
+  "bx-stopwatch": "ec2d",
+  "bx-cloud-rain": "ea65",
+  "bx-wind": "ec81",
+  'bx-humidity': "ec7a",
+  "bx-arrow-btn-right": "ebea",
 };
 
 /**
@@ -73,6 +84,30 @@ export const icon = {
     ) : (
       <Bx code={GLYPH["bx-server"]} size={size} color={color} />
     ),
+
+  location: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bxs-map"]} size={size} color={color} />
+  ),
+
+  pressure: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bx-stopwatch"]} size={size} color={color} />
+  ),
+
+  precipitation: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bx-cloud-rain"]} size={size} color={color} />
+  ),
+
+  wind: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bx-wind"]} size={size} color={color} />
+  ),
+
+  humidity: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bx-humidity"]} size={size} color={color} />
+  ),
+
+  arrowrightbtn: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bx-arrow-btn-right"]} size={size} color={color} />
+  ),
 };
 
 export { Bx, GLYPH };
