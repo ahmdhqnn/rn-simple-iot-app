@@ -55,7 +55,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
           indicatorStyle,
           {
             position: 'absolute',
-            backgroundColor: '#98CD00',
+            backgroundColor: '#C7FF1A',
             borderRadius: 100,
             marginHorizontal: 12,
             height: dimensions.height - 15,
