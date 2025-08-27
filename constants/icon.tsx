@@ -24,6 +24,8 @@ const GLYPH: Record<string, string> = {
   "bx-wind": "ec81",
   'bx-humidity': "ec7a",
   "bx-arrow-btn-right": "ebea",
+  "bx-notification": "e9d2",
+  "bx-search": "ebf8",
 };
 
 /**
@@ -107,6 +109,14 @@ export const icon = {
 
   arrowrightbtn: ({ size = 14, color = "#111" }) => (
     <Bx code={GLYPH["bx-arrow-btn-right"]} size={size} color={color} />
+  ),
+
+  notification: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bx-notification"]} size={size} color={color} />
+  ),
+
+  search: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bx-search"]} size={size} color={color} />
   ),
 };
 

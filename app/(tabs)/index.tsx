@@ -17,16 +17,16 @@ const riceImg = require("../../assets/images/examplepadi.png");
 export default function Index() {
   return (
     <SafeAreaView style={styles.root}>
+      <View style={styles.appbarSpacer} />
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Top App Bar */}
+        {/* Top App Bar (tanpa title) */}
         <View style={styles.appbar}>
-          <View style={{ width: 44, height: 44 }} />
-          <Text style={styles.appTitle}>Crop Info</Text>
           <View style={styles.appbarActions}>
-            <CircleIcon icon={<Feather name="search" size={18} color="#1f1f1f" />} />
-            <CircleIcon icon={<Feather name="bell" size={18} color="#1f1f1f" />} />
+            <CircleIcon icon={icon.search({ size: 24, color: "#000" })} />
+            <CircleIcon icon={icon.notification({ size: 24, color: "#000" })} />
           </View>
         </View>
+
 
         {/* Main Card */}
         <View style={styles.card}>
@@ -179,28 +179,42 @@ const styles = StyleSheet.create({
   content: { paddingVertical: 16, paddingHorizontal: 16, paddingBottom: 28 },
 
   /* app bar */
-  appbar: { flexDirection: "row", alignItems: "center", marginBottom: 12 },
-  appTitle: { flex: 1, textAlign: "center", fontSize: 16, fontWeight: "700", color: "#121212" },
-  appbarActions: { flexDirection: "row", gap: 10 },
+  appbar: {
+    position: 'relative',
+    height: 80,              // cukup tinggi biar action bisa "agak bawah"
+    marginBottom: 0,
+  },
+  appbarActions: {
+    position: 'absolute',
+    right: 16,               // tetap kanan atas
+    top: 12,                 // agak lebih rendah dari tepi atas
+    flexDirection: 'row',
+    gap: 10,
+  },
+  appbarSpacer: {
+    height: 36,              // ruang ekstra sebelum card (bisa 12–16 sesuai selera)
+  },
+
   circleIcon: {
-    width: 40, height: 40, borderRadius: 20,
-    backgroundColor: "#EEEEF1", alignItems: "center", justifyContent: "center",
+    width: 50, height: 50, borderRadius: 50,
+    backgroundColor: "#ECEFF3", alignItems: "center", justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#C9CDD6",
   },
 
   /* card */
   card: {
     backgroundColor: "#FFF",
     borderRadius: 18,
-    padding: 16,
-    // borderWidth: 1,
-    // borderColor: "#DBDEE4",
-    // shadowColor: "#000",
-    // shadowOpacity: 0.06,
-    // shadowRadius: 18,
-    // shadowOffset: { width: 0, height: 8 },
-    // elevation: 4,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    paddingTop: 24,          // ↑ beri ruang ke bawah untuk card header
   },
-  cardHead: { flexDirection: "row", alignItems: "center", marginBottom: 6 },
+  cardHead: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 6,
+  },
   locationChip: {
     maxWidth: "78%",
     flexDirection: "row",
