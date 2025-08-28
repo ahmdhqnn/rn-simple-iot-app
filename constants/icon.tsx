@@ -1,18 +1,19 @@
+// import analitik from "@/app/(tabs)/analitik";
 import React from "react";
 import { Text } from "react-native";
 
 const GLYPH: Record<string, string> = {
   // ===== Home =====
-  "bx-home-alt-2": "eb16",   // outline
-  "bxs-home-alt-2": "edea",  // filled
+  "bx-home-alt-2": "eb14",   // outline
+  "bxs-home-alt-2": "ede8",  // filled
 
   // ===== Chart =====
   "bx-bar-chart-alt-2": "e99a",
   "bxs-bar-chart-alt-2": "ec98",
 
   // ===== Setting =====
-  "bx-server": "ebfd",
-  "bxs-server": "ee9e",
+  "bx-server": "ea6e",
+  "bxs-server": "ed52",
 
   // ===== Location =====
   "bxs-map": "ee19",
@@ -25,8 +26,18 @@ const GLYPH: Record<string, string> = {
   'bx-humidity': "ec7a",
   "bx-arrow-btn-right": "ebea",
   "bx-notification": "e9d2",
-  "bx-search": "ebf8",
+  "bx-search": "ebf7",
+  "bxs-notepad": "ee59",
+  "bx-notepad": "ea5e",
+  "bxs-cloud": "eebe",
+  "bxs-chart": "ee6f",
+  "bxs-device": "ee9e",
+  "bxs-aiassist": "ee3e",
+
+
 };
+
+
 
 /**
  * Komponen render karakter dari font Boxicons.
@@ -80,12 +91,43 @@ export const icon = {
       <Bx code={GLYPH["bx-bar-chart-alt-2"]} size={size} color={color} />
     ),
 
-  device: ({ focused, size = 24, color = "#222" }: IconProps) =>
+  setting: ({ focused, size = 24, color = "#222" }: IconProps) =>
     focused ? (
       <Bx code={GLYPH["bxs-server"]} size={size} color={color} />
     ) : (
       <Bx code={GLYPH["bx-server"]} size={size} color={color} />
     ),
+  // analitik: ({ focused, size = 24, color = "#222" }: IconProps) =>
+  //   focused ? (
+  //     <Bx code={GLYPH["bxs-server"]} size={size} color={color} />
+  //   ) : (
+  //     <Bx code={GLYPH["bx-server"]} size={size} color={color} />
+  //   ),
+  // chatai: ({ focused, size = 24, color = "#222" }: IconProps) =>
+  //   focused ? (
+  //     <Bx code={GLYPH["bxs-server"]} size={size} color={color} />
+  //   ) : (
+  //     <Bx code={GLYPH["bx-server"]} size={size} color={color} />
+  //   ),
+
+
+
+  aiassist: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bxs-aiassist"]} size={size} color={color} />
+  ),
+  devices: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bxs-device"]} size={size} color={color} />
+  ),
+  analitik: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bxs-chart"]} size={size} color={color} />
+  ),
+  notes: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bxs-notepad"]} size={size} color={color} />
+  ),
+
+  weather: ({ size = 14, color = "#111" }) => (
+    <Bx code={GLYPH["bxs-cloud"]} size={size} color={color} />
+  ),
 
   location: ({ size = 14, color = "#111" }) => (
     <Bx code={GLYPH["bxs-map"]} size={size} color={color} />
