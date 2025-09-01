@@ -1,4 +1,5 @@
 import { icon } from "@/constants/icon";
+import { F } from "@/theme/fonts";
 import { Feather } from "@expo/vector-icons";
 import React from "react";
 import {
@@ -12,16 +13,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useRouter } from "expo-router";
 
 const riceImg = require("../../assets/images/examplepadi.png");
 
 export default function Index() {
+  const router = useRouter();
   const moreItems = [
-    { key: "analytics", label: "Analitik", icon: icon.analitik({ size: 24, color: "#fff" }), onPress: () => { } },
-    { key: "notes", label: "Notes", icon: icon.notes({ size: 24, color: "#fff" }), onPress: () => { } },
-    { key: "ai", label: "AI assist", icon: icon.aiassist({ size: 24, color: "#fff" }), onPress: () => { } },
-    { key: "weather", label: "Weather", icon: icon.weather({ size: 24, color: "#fff" }), onPress: () => { } },
-    { key: "device", label: "Device", icon: icon.devices({ size: 24, color: "#fff" }), onPress: () => { } },
+    { key: "analytics", label: "Analitik",   icon: icon.analitik({ size: 24, color: "#fff" }), onPress: () => router.push("/analytics") },
+    { key: "notes",     label: "Notes",      icon: icon.notes({ size: 24, color: "#fff" }),     onPress: () => {} },
+    { key: "ai",        label: "AI assist",  icon: icon.aiassist({ size: 24, color: "#fff" }),  onPress: () => {} },
+    { key: "weather",   label: "Weather",    icon: icon.weather({ size: 24, color: "#fff" }),   onPress: () => {} },
+    { key: "device",    label: "Device",     icon: icon.devices({ size: 24, color: "#fff" }),   onPress: () => {} },
   ];
 
   return (
@@ -38,7 +41,9 @@ export default function Index() {
         <Text style={styles.bigTitle}>What are you looking for today?</Text>
         <View style={styles.searchRow}>
           <View style={styles.searchField}>
-            icon: {icon.search({ size: 18, color: "#9CA3AF" })}
+            <View style={{ marginRight: 6 }}>
+              {icon.search({ size: 18, color: "#9CA3AF" })}
+            </View>
             <TextInput
               placeholder="Search here"
               placeholderTextColor="#9CA3AF"
@@ -130,7 +135,7 @@ export default function Index() {
   );
 }
 
-/* ---------- Header Profile (avatar kiri + 2 baris teks kanan) ---------- */
+/* ---------- Header Profile ---------- */
 function HeaderProfile({
   name,
   tagline,
@@ -140,7 +145,6 @@ function HeaderProfile({
   tagline?: string;
   notifDot?: boolean;
 }) {
-  // "Morning, ahmad" style
   const hour = new Date().getHours();
   const segment = hour < 11 ? "Morning" : hour < 15 ? "Afternoon" : hour < 19 ? "Evening" : "Night";
   const displayName = (name ?? "User").toLowerCase();
@@ -250,11 +254,11 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: "#D9D9D9", // placeholder abu-abu persis referensi
+    backgroundColor: "#D9D9D9",
   },
   headerTextWrap: { marginLeft: 10, justifyContent: "center" },
-  headerTitle: { fontSize: 18, fontWeight: "800", color: "#111" }, // "Morning, ahmad"
-  headerSub: { fontSize: 12, fontWeight: "500", color: "#111", }, // tagline
+  headerTitle: { fontSize: 16, color: "#111", fontFamily: F.bold },
+  headerSub: { fontSize: 12, color: "#111", fontFamily: F.medium },
 
   headerActions: { flexDirection: "row", gap: 10 },
   circleIcon: {
@@ -274,18 +278,16 @@ const styles = StyleSheet.create({
   },
 
   /* big title + search */
-  bigTitle: { marginTop: 40, fontSize: 24, lineHeight: 30, fontWeight: "800", color: "#111" },
+  bigTitle: { marginTop: 40, fontSize: 24, lineHeight: 30, color: "#111", fontFamily: F.bold },
   searchRow: { marginTop: 10, flexDirection: "row", alignItems: "center", gap: 10 },
   searchField: {
     flex: 1, height: 48, borderRadius: 26, backgroundColor: "#fff",
-    // borderWidth: 1, borderColor: "#E3E7EE",
     paddingHorizontal: 14, flexDirection: "row", alignItems: "center", gap: 8,
   },
   searchInput: { flex: 1, paddingVertical: 0, fontSize: 14, color: "#111" },
   smallCircle: {
     width: 44, height: 44, borderRadius: 22,
     backgroundColor: "#fff", alignItems: "center", justifyContent: "center",
-    // borderWidth: 1, borderColor: "#E3E7EE",
   },
 
   /* main card */
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
     maxWidth: "78%", flexDirection: "row", alignItems: "center", gap: 6,
     paddingHorizontal: 10, height: 28, borderRadius: 16, backgroundColor: "#EDEFF3",
   },
-  locationText: { fontSize: 12, fontWeight: "700", color: "#111" },
+  locationText: { fontSize: 12, color: "#111", fontFamily: F.bold },
 
   hero: { position: "relative", paddingTop: 4, paddingBottom: 8, minHeight: 225 },
   plantWrap: { position: "absolute", top: -40, left: 0, right: 0, alignItems: "center", pointerEvents: "none" },
@@ -303,11 +305,11 @@ const styles = StyleSheet.create({
 
   headerRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 22 },
   tempRow: { flexDirection: "row", alignItems: "flex-start" },
-  plus: { fontSize: 28, fontWeight: "800", color: "#111", marginRight: 2, lineHeight: 36 },
-  tempMain: { fontSize: 56, lineHeight: 56, fontWeight: "800", color: "#111", marginBottom: 70 },
-  tempUnit: { marginTop: 6, marginLeft: 4, fontSize: 22, fontWeight: "700", color: "#111" },
+  plus: { fontSize: 28, color: "#111", marginRight: 2, lineHeight: 36, fontFamily: F.medium },
+  tempMain: { fontSize: 56, lineHeight: 56, color: "#111", marginBottom: 70, fontFamily: F.bold },
+  tempUnit: { marginTop: 6, marginLeft: 4, fontSize: 22, color: "#111", fontFamily: F.bold },
   hlBlock: { alignItems: "flex-end" },
-  hlText: { fontSize: 12, color: "#2B2B2E", fontWeight: "600", lineHeight: 16 },
+  hlText: { fontSize: 12, color: "#2B2BE", lineHeight: 16, fontFamily: F.semibold },
 
   metricPair: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 12 },
   metricCellLeft: { width: "45%", alignItems: "flex-start" },
@@ -315,10 +317,10 @@ const styles = StyleSheet.create({
   metricRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   metricRowRight: { alignSelf: "flex-end", justifyContent: "flex-end" },
   metricIcon: { width: 28, height: 28, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: "#F2FCE1" },
-  metricTextRight: { width: 68, alignItems: "flex-start" },
+  metricTextRight: { width: 78, alignItems: "flex-start" },
   metricText: {},
-  metricLabel: { fontSize: 12, color: "#6B7280" },
-  metricValue: { fontSize: 15, color: "#111", fontWeight: "800" },
+  metricLabel: { fontSize: 12, color: "#6B7280", fontFamily: F.medium },
+  metricValue: { fontSize: 15, color: "#111", fontFamily: F.bold },
 
   detailsBtn: {
     marginTop: 12, height: 52, borderRadius: 14,
@@ -326,16 +328,16 @@ const styles = StyleSheet.create({
     alignItems: "center", justifyContent: "center",
   },
   detailsBtnHover: { backgroundColor: "#F2FCE1", borderColor: "#C7FF1A" },
-  detailsTxt: { fontSize: 15, fontWeight: "700", color: "#1f1f1f" },
+  detailsTxt: { fontSize: 15, color: "#1f1f1f", fontFamily: F.bold },
   detailsTxtHover: { color: "#C7FF1A" },
   detailsIconWrap: { position: "absolute", right: 16, top: 0, bottom: 0, justifyContent: "center", alignItems: "center" },
 
   /* more menu */
   moreWrap: { marginTop: 16 },
-  sectionTitle: { fontSize: 14, fontWeight: "800", color: "#1A1A1A", marginBottom: 8 },
+  sectionTitle: { fontSize: 16, color: "#1A1A1A", marginBottom: 8, fontFamily: F.medium },
   menuCard: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingVertical: 14, paddingHorizontal: 12, backgroundColor: "#FFF", borderRadius: 22 },
   menuItem: { width: 64, alignItems: "center", justifyContent: "center" },
   menuIconWrap: { width: 56, height: 56, borderRadius: 28, backgroundColor: "#C7FF1A", alignItems: "center", justifyContent: "center", marginBottom: 6 },
   menuIconWrapHover: { backgroundColor: "#F2FCE1" },
-  menuLabel: { fontSize: 12, color: "#111", fontWeight: "600" },
+  menuLabel: { fontSize: 12, color: "#111", fontFamily: F.medium },
 });

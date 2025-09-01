@@ -1,4 +1,5 @@
 import { icon } from "@/constants/icon";
+import { F } from "@/theme/fonts";
 import React, { useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import Animated, {
@@ -30,48 +31,31 @@ const TabBarbutton = ({
   const scale = useSharedValue(0);
 
   useEffect(() => {
-    scale.value = withSpring(
-      typeof isFocused === "boolean" ? (isFocused ? 1 : 0) : isFocused,
-      { duration: 350 }
-    );
-  }, [scale, isFocused]);
+    scale.value = withSpring(isFocused ? 1 : 0, { duration: 350 });
+  }, [isFocused, scale]);
 
   const animatedIconStyle = useAnimatedStyle(() => {
     const scaleValue = interpolate(scale.value, [0, 1], [1, 1.2]);
     const top = interpolate(scale.value, [0, 1], [0, 9]);
-
-    return {
-      transform: [{ scale: scaleValue }],
-      top,
-    };
+    return { transform: [{ scale: scaleValue }], top };
   });
 
   const animatedTextStyle = useAnimatedStyle(() => {
     const opacity = interpolate(scale.value, [0, 1], [1, 0]);
-    return {
-      opacity,
-    };
+    return { opacity };
   });
 
   return (
-    <Pressable
-      onPressIn={onPress}
-      onLongPress={onLongPress}
-      style={styles.tabBarItem}
-    >
+    <Pressable onPressIn={onPress} onLongPress={onLongPress} style={styles.tabBarItem}>
       <Animated.View style={[animatedIconStyle]}>
         {icon[routeName]({
           focused: isFocused,
           size: 24,
+          color: isFocused ? "#111" : "#222",
         })}
       </Animated.View>
-      {/* Animated text for the label */}
-      <Animated.Text
-        style={[
-          { color: isFocused ? "" : "#222", fontSize: 12 },
-          animatedTextStyle,
-        ]}
-      >
+
+      <Animated.Text style={[{ color: "#222", fontSize: 12, fontFamily: F.medium }, animatedTextStyle]}>
         {label}
       </Animated.Text>
     </Pressable>
