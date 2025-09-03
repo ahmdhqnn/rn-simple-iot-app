@@ -1,11 +1,10 @@
-// import analitik from "@/app/(tabs)/analitik";
 import React from "react";
 import { Text } from "react-native";
 
 const GLYPH: Record<string, string> = {
   // ===== Home =====
-  "bx-home-alt-2": "eb14",   // outline
-  "bxs-home-alt-2": "ede8",  // filled
+  "bx-home-alt-2": "eb14",
+  "bxs-home-alt-2": "ede8",
 
   // ===== Chart =====
   "bx-bar-chart-alt-2": "e99a",
@@ -23,7 +22,7 @@ const GLYPH: Record<string, string> = {
   "bx-stopwatch": "ec2d",
   "bx-cloud-rain": "ea65",
   "bx-wind": "ec81",
-  'bx-humidity': "ec7a",
+  "bx-humidity": "ec7a",
   "bx-arrow-btn-right": "ebea",
   "bx-notification": "e9d2",
   "bx-search": "ebf7",
@@ -33,19 +32,13 @@ const GLYPH: Record<string, string> = {
   "bxs-chart": "ee6f",
   "bxs-device": "ee9e",
   "bxs-aiassist": "ee3e",
-
-
+  "bx-chevron-left": "ea4d",
+  "bx-more-dote": "eab2",
 };
-
-
 
 /**
  * Komponen render karakter dari font Boxicons.
- * Pastikan font sudah di-load di root app:
- * 
- * const [loaded] = useFonts({
- *   Boxicons: require("../assets/fonts/boxicons.ttf"),
- * });
+ * Pastikan font sudah di-load di root app (Boxicons.ttf).
  */
 function Bx({
   code,
@@ -62,6 +55,8 @@ function Bx({
         fontFamily: "Boxicons",
         fontSize: size,
         color,
+        includeFontPadding: false,    // Android: buang padding ekstra
+        textAlignVertical: "center",  // Android: vertikal center
       }}
       allowFontScaling={false}
     >
@@ -72,10 +67,6 @@ function Bx({
 
 type IconProps = { focused?: boolean; size?: number; color?: string };
 
-/**
- * Kumpulan icon untuk Tab Bar atau komponen lain.
- * Tinggal panggil: icon.index({ focused, size, color })
- */
 export const icon = {
   index: ({ focused, size = 24, color = "#222" }: IconProps) =>
     focused ? (
@@ -97,69 +88,22 @@ export const icon = {
     ) : (
       <Bx code={GLYPH["bx-server"]} size={size} color={color} />
     ),
-  // analitik: ({ focused, size = 24, color = "#222" }: IconProps) =>
-  //   focused ? (
-  //     <Bx code={GLYPH["bxs-server"]} size={size} color={color} />
-  //   ) : (
-  //     <Bx code={GLYPH["bx-server"]} size={size} color={color} />
-  //   ),
-  // chatai: ({ focused, size = 24, color = "#222" }: IconProps) =>
-  //   focused ? (
-  //     <Bx code={GLYPH["bxs-server"]} size={size} color={color} />
-  //   ) : (
-  //     <Bx code={GLYPH["bx-server"]} size={size} color={color} />
-  //   ),
 
-
-
-  aiassist: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bxs-aiassist"]} size={size} color={color} />
-  ),
-  devices: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bxs-device"]} size={size} color={color} />
-  ),
-  analitik: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bxs-chart"]} size={size} color={color} />
-  ),
-  notes: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bxs-notepad"]} size={size} color={color} />
-  ),
-
-  weather: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bxs-cloud"]} size={size} color={color} />
-  ),
-
-  location: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bxs-map"]} size={size} color={color} />
-  ),
-
-  pressure: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bx-stopwatch"]} size={size} color={color} />
-  ),
-
-  precipitation: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bx-cloud-rain"]} size={size} color={color} />
-  ),
-
-  wind: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bx-wind"]} size={size} color={color} />
-  ),
-
-  humidity: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bx-humidity"]} size={size} color={color} />
-  ),
-
-  arrowrightbtn: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bx-arrow-btn-right"]} size={size} color={color} />
-  ),
-
-  notification: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bx-notification"]} size={size} color={color} />
-  ),
-
-  search: ({ size = 14, color = "#111" }) => (
-    <Bx code={GLYPH["bx-search"]} size={size} color={color} />
-  ),
+  aiassist: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bxs-aiassist"]} size={size} color={color} />,
+  devices:  ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bxs-device"]}   size={size} color={color} />,
+  analitik: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bxs-chart"]}    size={size} color={color} />,
+  notes:    ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bxs-notepad"]}  size={size} color={color} />,
+  weather:  ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bxs-cloud"]}    size={size} color={color} />,
+  location: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bxs-map"]}      size={size} color={color} />,
+  pressure: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-stopwatch"]} size={size} color={color} />,
+  precipitation: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-cloud-rain"]} size={size} color={color} />,
+  wind:     ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-wind"]}      size={size} color={color} />,
+  humidity: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-humidity"]}  size={size} color={color} />,
+  arrowrightbtn: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-arrow-btn-right"]} size={size} color={color} />,
+  notification:  ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-notification"]}   size={size} color={color} />,
+  search:        ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-search"]}         size={size} color={color} />,
+  chevronleft: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-chevron-left"]} size={size} color={color} />,
+  moredote: ({ size = 14, color = "#111" }) => <Bx code={GLYPH["bx-more-dote"]} size={size} color={color} />,
 };
 
 export { Bx, GLYPH };
