@@ -1,6 +1,7 @@
 import { icon } from "@/constants/icon";
 import { F } from "@/theme/fonts";
 import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   Image,
@@ -13,18 +14,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useRouter } from "expo-router";
 
 const riceImg = require("../../assets/images/examplepadi.png");
 
 export default function Index() {
   const router = useRouter();
   const moreItems = [
-    { key: "analytics", label: "Analitik",   icon: icon.analitik({ size: 24, color: "#fff" }), onPress: () => router.push("/analytics") },
-    { key: "notes",     label: "Notes",      icon: icon.notes({ size: 24, color: "#fff" }),     onPress: () => {} },
-    { key: "ai",        label: "AI assist",  icon: icon.aiassist({ size: 24, color: "#fff" }),  onPress: () => {} },
-    { key: "weather",   label: "Weather",    icon: icon.weather({ size: 24, color: "#fff" }),   onPress: () => {} },
-    { key: "device",    label: "Device",     icon: icon.devices({ size: 24, color: "#fff" }),   onPress: () => {} },
+    { key: "analytics", label: "Analitik", icon: icon.analitik({ size: 24, color: "#fff" }), onPress: () => router.push("/analytics") },
+    { key: "notes", label: "Notes", icon: icon.notes({ size: 24, color: "#fff" }), onPress: () => { } },
+    { key: "ai", label: "AI assist", icon: icon.aiassist({ size: 24, color: "#fff" }), onPress: () => { } },
+    { key: "weather", label: "Weather", icon: icon.weather({ size: 24, color: "#fff" }), onPress: () => router.push("/weather") },
+    { key: "device", label: "Device", icon: icon.devices({ size: 24, color: "#fff" }), onPress: () => { } },
   ];
 
   return (

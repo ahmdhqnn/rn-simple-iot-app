@@ -1,26 +1,26 @@
 // app/analytics.tsx
+import { icon } from "@/constants/icon";
+import { F } from "@/theme/fonts";
+import { Stack, useRouter } from "expo-router";
 import React from "react";
 import {
+  LayoutChangeEvent,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  View,
-  Pressable,
-  LayoutChangeEvent,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { Stack, useRouter } from "expo-router";
-import Svg, { Rect, Polyline, Path, Defs, LinearGradient, Stop } from "react-native-svg";
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  interpolate,
   Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from "react-native-reanimated";
-import { F } from "@/theme/fonts";
-import { icon } from "@/constants/icon";
+import Svg, { Defs, LinearGradient, Path, Polyline, Rect, Stop } from "react-native-svg";
 
 const BG = "#F5F6F8";
 const CARD = "#FFFFFF";
@@ -375,19 +375,29 @@ const styles = StyleSheet.create({
 
   segmentWrap: {
     flexDirection: "row", backgroundColor: CARD, borderRadius: 16,
-    overflow: "hidden", borderWidth: 1, borderColor: MUTED,
+    overflow: "hidden",
+    // 
+    // borderWidth: 1, borderColor: MUTED,
+
   },
   segmentIndicator: { position: "absolute", top: 0, bottom: 0, backgroundColor: "#F2FCE1" },
   segmentBtn: { flex: 1, height: 44, alignItems: "center", justifyContent: "center" },
   segmentTxt: { fontSize: 12, color: SUBT, fontFamily: F.medium },
 
-  card: { marginTop: 12, backgroundColor: CARD, borderRadius: 18, padding: 14, borderWidth: 1, borderColor: MUTED },
+  card: {
+    marginTop: 12, backgroundColor: CARD, borderRadius: 18, padding: 14,
+    // borderWidth: 1, borderColor: MUTED 
+  },
   cardHead: { marginBottom: 8 },
   cardTitle: { fontSize: 16, color: TEXT, fontFamily: F.bold },
   cardSub: { fontSize: 12, color: SUBT, fontFamily: F.medium },
 
   minicardRow: { flexDirection: "row", gap: 10 },
-  minicard: { flex: 1, backgroundColor: CARD, padding: 12, borderRadius: 14, borderWidth: 1, borderColor: MUTED, flexDirection: "row", alignItems: "center" },
+  minicard: {
+    flex: 1, backgroundColor: CARD, padding: 12, borderRadius: 14,
+    // borderWidth: 1, borderColor: MUTED,
+    flexDirection: "row", alignItems: "center"
+  },
   miniIcon: { width: 28, height: 28, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: "#EEF6D3" },
   miniLabel: { fontSize: 11, color: SUBT, fontFamily: F.medium },
   miniValue: { fontSize: 14, color: TEXT, fontFamily: F.bold },
