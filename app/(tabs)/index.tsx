@@ -24,7 +24,7 @@ export default function Index() {
     { key: "notes", label: "Notes", icon: icon.notes({ size: 24, color: "#fff" }), onPress: () => { } },
     { key: "ai", label: "AI assist", icon: icon.aiassist({ size: 24, color: "#fff" }), onPress: () => { } },
     { key: "weather", label: "Weather", icon: icon.weather({ size: 24, color: "#fff" }), onPress: () => router.push("/weather") },
-    { key: "device", label: "Device", icon: icon.devices({ size: 24, color: "#fff" }), onPress: () => { } },
+    { key: "device", label: "Device", icon: icon.devices({ size: 24, color: "#fff" }), onPress: () => router.push("/device") },
   ];
 
   return (
